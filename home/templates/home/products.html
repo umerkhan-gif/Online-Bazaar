@@ -1,0 +1,140 @@
+{% extends 'home/base.html' %}
+
+{% block title %}
+All Products - OnlineBazar
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+
+    <div class="page-header-content">
+
+        <p>ONLINEBAZAR</p>
+
+        <h1>All Products</h1>
+
+        <span>
+            Explore our latest collection
+        </span>
+
+    </div>
+
+</section>
+
+
+<section class="section products-page">
+
+    <div class="products-top">
+
+        <div>
+
+            <p class="section-small">
+                OUR COLLECTION
+            </p>
+
+            <h2>
+                Shop All Products
+            </h2>
+
+        </div>
+
+        <span class="product-count">
+            {{ products|length }} Products
+        </span>
+
+    </div>
+
+
+    <div class="products-grid">
+
+        {% for product in products %}
+
+        <div class="product-card">
+
+            <a href="{% url 'product_detail' product.id %}">
+
+                {% if product.image %}
+
+                <div class="product-image">
+
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}">
+
+                </div>
+
+                {% else %}
+
+                <div class="product-image no-image">
+                    No Image
+                </div>
+
+                {% endif %}
+
+            </a>
+
+
+            <div class="product-info">
+
+                {% if product.category %}
+
+                <p class="category">
+                    {{ product.category.name }}
+                </p>
+
+                {% endif %}
+
+
+                <h3>
+
+                    <a href="{% url 'product_detail' product.id %}">
+
+                        {{ product.name }}
+
+                    </a>
+
+                </h3>
+
+
+                <div class="price">
+
+                    Rs. {{ product.price }}
+
+                </div>
+
+
+                <a
+                    href="{% url 'add_to_cart' product.id %}"
+                    class="add-btn">
+
+                    Add to Cart
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        {% empty %}
+
+        <div class="empty-products">
+
+            <h2>
+                No Products Found
+            </h2>
+
+            <p>
+                Add products from the admin panel.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

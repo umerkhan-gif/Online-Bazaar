@@ -1,0 +1,114 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Contact Us - OnlineBazar{% endblock %}
+
+{% block content %}
+
+<section class="contact-section">
+
+    <div class="contact-container">
+
+        <div class="contact-header">
+            <span>GET IN TOUCH</span>
+            <h1>Contact Us</h1>
+            <p>
+                Agar aapka koi sawal hai ya kisi product ke
+                baare mein information chahiye, humse contact karein.
+            </p>
+        </div>
+
+        <div class="contact-content">
+
+            <div class="contact-info">
+
+                <h2>Let's Talk</h2>
+
+                <p>
+                    Hum aapki help karne ke liye available hain.
+                    Neeche diye gaye form se humein message bhej sakte hain.
+                </p>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <h3>Email</h3>
+                        <p>support@onlinebazar.com</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <h3>Phone</h3>
+                        <p>0300-1234567</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h3>Location</h3>
+                        <p>Lahore, Pakistan</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="contact-form-box">
+
+                {% if success %}
+                    <div class="contact-success">
+                        {{ success }}
+                    </div>
+                {% endif %}
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <div class="contact-form-group">
+                        <label>Your Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Enter your name"
+                            required
+                        >
+                    </div>
+
+                    <div class="contact-form-group">
+                        <label>Email Address</label>
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+                    </div>
+
+                    <div class="contact-form-group">
+                        <label>Your Message</label>
+                        <textarea
+                            name="message"
+                            rows="6"
+                            placeholder="Write your message..."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <button type="submit" class="contact-submit">
+                        Send Message
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

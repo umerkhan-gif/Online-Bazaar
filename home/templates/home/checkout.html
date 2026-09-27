@@ -1,0 +1,196 @@
+{% extends 'home/base.html' %}
+
+{% block title %}
+Checkout - OnlineBazar
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-header">
+
+    <div class="page-header-content">
+
+        <p>ONLINEBAZAR</p>
+
+        <h1>Checkout</h1>
+
+        <span>Complete your order</span>
+
+    </div>
+
+</section>
+
+
+<section class="checkout-section">
+
+    <div class="checkout-container">
+
+
+        <!-- CUSTOMER FORM -->
+
+        <div class="checkout-form-box">
+
+            <div class="checkout-title">
+
+                <p class="section-small">
+                    DELIVERY INFORMATION
+                </p>
+
+                <h2>
+                    Your Details
+                </h2>
+
+            </div>
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                {% if form.errors %}
+
+                <div class="form-errors">
+
+                    Please correct the errors below.
+
+                </div>
+
+                {% endif %}
+
+
+                <div class="form-group">
+
+                    {{ form.customer_name.label_tag }}
+
+                    {{ form.customer_name }}
+
+                    {{ form.customer_name.errors }}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    {{ form.email.label_tag }}
+
+                    {{ form.email }}
+
+                    {{ form.email.errors }}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    {{ form.phone.label_tag }}
+
+                    {{ form.phone }}
+
+                    {{ form.phone.errors }}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    {{ form.address.label_tag }}
+
+                    {{ form.address }}
+
+                    {{ form.address.errors }}
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="place-order-btn">
+
+                    Place Order →
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- ORDER REVIEW -->
+
+        <aside class="checkout-summary">
+
+            <h2>
+                Your Order
+            </h2>
+
+
+            {% for item in products %}
+
+            <div class="checkout-item">
+
+
+                <div class="checkout-item-image">
+
+                    {% if item.product.image %}
+
+                    <img
+                        src="{{ item.product.image.url }}"
+                        alt="{{ item.product.name }}">
+
+                    {% else %}
+
+                    <div class="no-image">
+                        No Image
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="checkout-item-info">
+
+                    <h3>
+                        {{ item.product.name }}
+                    </h3>
+
+                    <p>
+                        Qty: {{ item.quantity }}
+                    </p>
+
+                </div>
+
+
+                <strong>
+                    Rs. {{ item.item_total }}
+                </strong>
+
+            </div>
+
+            {% endfor %}
+
+
+            <div class="checkout-total-line"></div>
+
+
+            <div class="checkout-total">
+
+                <span>
+                    Total
+                </span>
+
+                <strong>
+                    Rs. {{ total }}
+                </strong>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</section>
+
+{% endblock %}

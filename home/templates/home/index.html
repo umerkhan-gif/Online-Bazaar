@@ -1,0 +1,438 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %}
+OnlineBazar - Online Shopping
+{% endblock %}
+
+{% block content %}
+
+
+<!-- =================================
+     HERO SLIDER
+================================= -->
+
+<section class="hero-slider">
+
+    <div class="slides">
+
+        <!-- SLIDE 1 -->
+        <div class="slide active">
+
+            <img
+                src="{% static 'home/images/slide1.jpg' %}"
+                alt="Electronics"
+            >
+
+            <div class="slide-overlay">
+
+                <div class="slide-content">
+
+                    <span>WELCOME TO ONLINEBAZAR</span>
+
+                    <h1>
+                        Upgrade Your<br>
+                        Tech Game
+                    </h1>
+
+                    <p>
+                        Smartphones, accessories and more.
+                    </p>
+
+                    <a
+                        href="{% url 'products' %}"
+                        class="slide-button"
+                    >
+                        Shop Now →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 2 -->
+        <div class="slide">
+
+            <img
+                src="{% static 'home/images/slide2.jpg' %}"
+                alt="Fashion"
+            >
+
+            <div class="slide-overlay">
+
+                <div class="slide-content">
+
+                    <span>NEW COLLECTION</span>
+
+                    <h1>
+                        Style Your<br>
+                        Everyday
+                    </h1>
+
+                    <p>
+                        Discover fashion, shoes and more.
+                    </p>
+
+                    <a
+                        href="{% url 'products' %}"
+                        class="slide-button"
+                    >
+                        Explore Products →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 3 -->
+        <div class="slide">
+
+            <img
+                src="{% static 'home/images/slide3.jpg' %}"
+                alt="Jewelry"
+            >
+
+            <div class="slide-overlay">
+
+                <div class="slide-content">
+
+                    <span>PREMIUM COLLECTION</span>
+
+                    <h1>
+                        Elegance In<br>
+                        Every Detail
+                    </h1>
+
+                    <p>
+                        Watches, jewelry and accessories.
+                    </p>
+
+                    <a
+                        href="{% url 'products' %}"
+                        class="slide-button"
+                    >
+                        Shop Now →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PREVIOUS BUTTON -->
+
+    <button
+        type="button"
+        class="slider-arrow prev"
+        onclick="changeSlide(-1)"
+    >
+        ❮
+    </button>
+
+
+    <!-- NEXT BUTTON -->
+
+    <button
+        type="button"
+        class="slider-arrow next"
+        onclick="changeSlide(1)"
+    >
+        ❯
+    </button>
+
+
+    <!-- DOTS -->
+
+    <div class="slider-dots">
+
+        <span
+            class="dot active"
+            onclick="currentSlide(1)"
+        ></span>
+
+        <span
+            class="dot"
+            onclick="currentSlide(2)"
+        ></span>
+
+        <span
+            class="dot"
+            onclick="currentSlide(3)"
+        ></span>
+
+    </div>
+
+</section>
+
+
+
+<!-- =================================
+     FEATURED PRODUCTS
+================================= -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <p class="section-small">
+            OUR COLLECTION
+        </p>
+
+        <h2>
+            Featured Products
+        </h2>
+
+        <p>
+            Explore some of our most popular products.
+        </p>
+
+    </div>
+
+
+    <div class="products-grid">
+
+        {% for product in featured_products %}
+
+            <a
+                href="{% url 'product_detail' product.id %}"
+                class="product-card"
+            >
+
+                <!-- PRODUCT IMAGE -->
+
+                <div class="product-image">
+
+                    {% if product.image %}
+
+                        <img
+                            src="{{ product.image.url }}"
+                            alt="{{ product.name }}"
+                        >
+
+                    {% else %}
+
+                        <div class="no-image">
+                            No Image
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- PRODUCT INFO -->
+
+                <div class="product-card-content">
+
+                    <span class="sale-badge">
+                        ON SALE
+                    </span>
+
+
+                    <h3>
+                        {{ product.name }}
+                    </h3>
+
+
+                    {% if product.category %}
+
+                        <p class="product-category">
+                            {{ product.category.name }}
+                        </p>
+
+                    {% endif %}
+
+
+                    <p class="product-price">
+                        Rs. {{ product.price }}
+                    </p>
+
+                </div>
+
+            </a>
+
+        {% empty %}
+
+            <div class="empty-products">
+
+                <h3>
+                    No products yet
+                </h3>
+
+                <p>
+                    Add products from the admin panel.
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- VIEW ALL -->
+
+    <div class="center-button">
+
+        <a
+            href="{% url 'products' %}"
+            class="outline-btn"
+        >
+            View All Products
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =================================
+     PROMO BANNER
+================================= -->
+
+<section class="promo">
+
+    <div class="promo-content">
+
+        <p>
+            ONLINEBAZAR COLLECTION
+        </p>
+
+        <h2>
+            New Products.
+            <br>
+            New Deals.
+        </h2>
+
+        <p>
+            Find something you'll love.
+        </p>
+
+        <a
+            href="{% url 'products' %}"
+            class="hero-btn"
+        >
+            Explore Now →
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =================================
+     SLIDER JAVASCRIPT
+================================= -->
+
+<script>
+
+let slideIndex = 1;
+let slideTimer;
+
+
+function showSlide(n) {
+
+    const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll(".dot");
+
+    if (slides.length === 0) {
+        return;
+    }
+
+
+    if (n > slides.length) {
+        slideIndex = 1;
+    }
+
+
+    if (n < 1) {
+        slideIndex = slides.length;
+    }
+
+
+    slides.forEach(function(slide) {
+
+        slide.classList.remove("active");
+
+    });
+
+
+    dots.forEach(function(dot) {
+
+        dot.classList.remove("active");
+
+    });
+
+
+    slides[slideIndex - 1].classList.add("active");
+
+
+    if (dots[slideIndex - 1]) {
+
+        dots[slideIndex - 1].classList.add("active");
+
+    }
+
+}
+
+
+function changeSlide(n) {
+
+    slideIndex = slideIndex + n;
+
+    showSlide(slideIndex);
+
+    resetTimer();
+
+}
+
+
+function currentSlide(n) {
+
+    slideIndex = n;
+
+    showSlide(slideIndex);
+
+    resetTimer();
+
+}
+
+
+function autoSlide() {
+
+    slideIndex = slideIndex + 1;
+
+    showSlide(slideIndex);
+
+}
+
+
+function resetTimer() {
+
+    clearInterval(slideTimer);
+
+    slideTimer = setInterval(autoSlide, 5000);
+
+}
+
+
+showSlide(slideIndex);
+
+slideTimer = setInterval(autoSlide, 5000);
+
+</script>
+
+
+{% endblock %}

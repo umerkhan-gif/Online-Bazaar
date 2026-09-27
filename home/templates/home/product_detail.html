@@ -1,0 +1,508 @@
+{% extends 'home/base.html' %}
+
+{% block title %}
+{{ product.name }} - OnlineBazar
+{% endblock %}
+
+{% block content %}
+
+<section class="product-detail-section">
+
+    <div class="product-detail-container">
+
+        <div class="product-gallery">
+
+            <div class="product-main-image">
+
+                {% if product.image %}
+
+                    <img
+                        id="mainProductImage"
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                    >
+
+                {% elif product.image_2 %}
+
+                    <img
+                        id="mainProductImage"
+                        src="{{ product.image_2.url }}"
+                        alt="{{ product.name }}"
+                    >
+
+                {% elif product.image_3 %}
+
+                    <img
+                        id="mainProductImage"
+                        src="{{ product.image_3.url }}"
+                        alt="{{ product.name }}"
+                    >
+
+                {% else %}
+
+                    <div class="product-no-image">
+                        No Image Available
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="product-thumbnails">
+
+                {% if product.image %}
+
+                    <button
+                        type="button"
+                        class="product-thumb active"
+                        data-image="{{ product.image.url }}"
+                    >
+
+                        <img
+                            src="{{ product.image.url }}"
+                            alt="{{ product.name }}"
+                        >
+
+                    </button>
+
+                {% endif %}
+
+
+                {% if product.image_2 %}
+
+                    <button
+                        type="button"
+                        class="product-thumb"
+                        data-image="{{ product.image_2.url }}"
+                    >
+
+                        <img
+                            src="{{ product.image_2.url }}"
+                            alt="{{ product.name }}"
+                        >
+
+                    </button>
+
+                {% endif %}
+
+
+                {% if product.image_3 %}
+
+                    <button
+                        type="button"
+                        class="product-thumb"
+                        data-image="{{ product.image_3.url }}"
+                    >
+
+                        <img
+                            src="{{ product.image_3.url }}"
+                            alt="{{ product.name }}"
+                        >
+
+                    </button>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <div class="product-detail-info">
+
+            {% if product.category %}
+
+                <a
+                    href="{% url 'category_products' product.category.name %}"
+                    class="product-category"
+                >
+                    {{ product.category.name }}
+                </a>
+
+            {% endif %}
+
+
+            <h1 class="product-title">
+                {{ product.name }}
+            </h1>
+
+
+            <div class="product-rating">
+
+                <span class="stars">
+                    ★★★★★
+                </span>
+
+                <span class="review-text">
+                    Product Details
+                </span>
+
+            </div>
+
+
+            <div class="product-detail-price">
+                Rs. {{ product.price }}
+            </div>
+
+
+            <div class="product-divider"></div>
+
+
+            <div class="product-description">
+
+                <h3>
+                    Description
+                </h3>
+
+                <p>
+                    {{ product.description }}
+                </p>
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="{% url 'add_to_cart' product.id %}"
+                class="add-cart-form"
+            >
+
+                {% csrf_token %}
+
+                <div class="quantity-area">
+
+                    <span class="quantity-label">
+                        Quantity
+                    </span>
+
+
+                    <div class="quantity-selector">
+
+                        <button
+                            type="button"
+                            class="quantity-control"
+                            id="decreaseBtn"
+                        >
+                            −
+                        </button>
+
+
+                        <input
+                            type="number"
+                            id="quantity"
+                            name="quantity"
+                            value="1"
+                            min="1"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="quantity-control"
+                            id="increaseBtn"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+               <div class="product-buttons">
+
+                    <button type="submit" class="product-add-cart">
+                           🛒 Add to Cart
+                    </button>
+
+                   <button
+                     type="submit"
+                     formaction="{% url 'buy_now' product.id %}"
+                     class="product-buy-now"
+                    >
+                     ⚡ Buy Now
+                   </button>
+
+               </div>
+
+            </form>
+
+
+            <div class="product-features">
+
+                <div class="feature-item">
+
+                    <div class="feature-icon">
+                        🚚
+                    </div>
+
+                    <div>
+                        <strong>
+                            Fast Delivery
+                        </strong>
+
+                        <p>
+                            Quick delivery to your doorstep.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="feature-item">
+
+                    <div class="feature-icon">
+                        🔒
+                    </div>
+
+                    <div>
+                        <strong>
+                            Secure Shopping
+                        </strong>
+
+                        <p>
+                            Safe shopping experience.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="feature-item">
+
+                    <div class="feature-icon">
+                        ↩️
+                    </div>
+
+                    <div>
+                        <strong>
+                            Easy Returns
+                        </strong>
+
+                        <p>
+                            Simple return process.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="{% url 'products' %}"
+                class="continue-shopping"
+            >
+                ← Continue Shopping
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="product-information-section">
+
+    <div class="information-grid">
+
+        <div class="information-box">
+
+            <h3>
+                Product Information
+            </h3>
+
+            <p>
+                Quality products available at OnlineBazar.
+            </p>
+
+        </div>
+
+
+        <div class="information-box">
+
+            <h3>
+                Delivery
+            </h3>
+
+            <p>
+                We deliver products directly to your doorstep.
+            </p>
+
+        </div>
+
+
+        <div class="information-box">
+
+            <h3>
+                Customer Support
+            </h3>
+
+            <p>
+                Contact us if you need any help.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% if related_products %}
+
+<section class="related-products-section">
+
+    <div class="section-container">
+
+        <h2>
+            You May Also Like
+        </h2>
+
+
+        <div class="related-products-grid">
+
+            {% for item in related_products %}
+
+                <a
+                    href="{% url 'product_detail' item.id %}"
+                    class="product-card"
+                >
+
+                    <div class="product-image">
+
+                        {% if item.image %}
+
+                            <img
+                                src="{{ item.image.url }}"
+                                alt="{{ item.name }}"
+                            >
+
+                        {% else %}
+
+                            <div class="no-image">
+                                No Image
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="product-card-content">
+
+                        <h3>
+                            {{ item.name }}
+                        </h3>
+
+                        <p class="product-price">
+                            Rs. {{ item.price }}
+                        </p>
+
+                    </div>
+
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+<script>
+
+const mainImage =
+    document.getElementById("mainProductImage");
+
+const thumbnails =
+    document.querySelectorAll(".product-thumb");
+
+
+thumbnails.forEach(function(thumbnail) {
+
+    thumbnail.addEventListener(
+        "click",
+        function() {
+
+            const image =
+                this.getAttribute("data-image");
+
+            if (mainImage) {
+
+                mainImage.src = image;
+
+            }
+
+            thumbnails.forEach(function(item) {
+
+                item.classList.remove("active");
+
+            });
+
+            this.classList.add("active");
+
+        }
+    );
+
+});
+
+
+const quantityInput =
+    document.getElementById("quantity");
+
+const increaseBtn =
+    document.getElementById("increaseBtn");
+
+const decreaseBtn =
+    document.getElementById("decreaseBtn");
+
+
+if (increaseBtn) {
+
+    increaseBtn.addEventListener(
+        "click",
+        function() {
+
+            let value =
+                parseInt(quantityInput.value) || 1;
+
+            quantityInput.value =
+                value + 1;
+
+        }
+    );
+
+}
+
+
+if (decreaseBtn) {
+
+    decreaseBtn.addEventListener(
+        "click",
+        function() {
+
+            let value =
+                parseInt(quantityInput.value) || 1;
+
+            if (value > 1) {
+
+                quantityInput.value =
+                    value - 1;
+
+            }
+
+        }
+    );
+
+}
+
+</script>
+
+{% endblock %}

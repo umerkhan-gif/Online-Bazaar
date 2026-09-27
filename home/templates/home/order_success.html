@@ -1,0 +1,115 @@
+{% extends 'home/base.html' %}
+
+{% block title %}
+Order Confirmed - OnlineBazar
+{% endblock %}
+
+
+{% block content %}
+
+<section class="success-section">
+
+    <div class="success-box">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+
+        <p class="section-small">
+            ORDER CONFIRMED
+        </p>
+
+
+        <h1>
+            Thank You!
+        </h1>
+
+
+        <p class="success-message">
+
+            Your order has been placed successfully.
+
+        </p>
+
+
+        <div class="order-number">
+
+            Order #
+
+            <strong>
+                {{ order.id }}
+            </strong>
+
+        </div>
+
+
+        <div class="success-details">
+
+            <div>
+
+                <span>
+                    Customer
+                </span>
+
+                <strong>
+                    {{ order.customer_name }}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Total
+                </span>
+
+                <strong>
+                    Rs. {{ order.total_amount }}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Status
+                </span>
+
+                <strong>
+                    {{ order.status }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="success-buttons">
+
+            <a
+                href="{% url 'my_orders' %}"
+                class="hero-btn">
+
+                View My Orders
+
+            </a>
+
+
+            <a
+                href="{% url 'products' %}"
+                class="outline-btn">
+
+                Continue Shopping
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

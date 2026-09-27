@@ -1,0 +1,58 @@
+{% extends 'home/base.html' %}
+
+{% block title %}{{ category.name }} - OnlineBazar{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1 class="page-title">
+        {{ category.name }}
+    </h1>
+
+    <div class="products-grid">
+
+        {% for product in products %}
+
+            <div class="product-card">
+
+                <a href="{% url 'product_detail' product.id %}">
+
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}"
+                             class="product-image"
+                             alt="{{ product.name }}">
+                    {% else %}
+                        <div class="no-image">No Image</div>
+                    {% endif %}
+
+                </a>
+
+                <div class="product-info">
+
+                    <h3>{{ product.name }}</h3>
+
+                    <div class="price">
+                        Rs. {{ product.price }}
+                    </div>
+
+                    <a href="{% url 'product_detail' product.id %}"
+                       class="btn">
+                        View Product
+                    </a>
+
+                </div>
+
+            </div>
+
+        {% empty %}
+
+            <p>No products in this category.</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

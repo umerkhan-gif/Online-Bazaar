@@ -1,0 +1,258 @@
+{% extends 'home/base.html' %}
+
+{% block title %}
+Shopping Cart - OnlineBazar
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+
+    <div class="page-header-content">
+
+        <p>ONLINEBAZAR</p>
+
+        <h1>Shopping Cart</h1>
+
+        <span>Review your selected products</span>
+
+    </div>
+
+</section>
+
+
+<section class="cart-section">
+
+    {% if products %}
+
+    <div class="cart-container">
+
+        <!-- CART PRODUCTS -->
+
+        <div class="cart-items">
+
+            <div class="cart-heading">
+
+                <h2>Your Cart</h2>
+
+                <span>
+                    {{ products|length }} item{{ products|length|pluralize }}
+                </span>
+
+            </div>
+
+
+            {% for item in products %}
+
+            <div class="cart-item">
+
+                <!-- IMAGE -->
+
+                <div class="cart-image">
+
+                    {% if item.product.image %}
+
+                    <img
+                        src="{{ item.product.image.url }}"
+                        alt="{{ item.product.name }}">
+
+                    {% else %}
+
+                    <div class="no-image">
+                        No Image
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- PRODUCT -->
+
+                <div class="cart-product">
+
+                    {% if item.product.category %}
+
+                    <p>
+                        {{ item.product.category.name }}
+                    </p>
+
+                    {% endif %}
+
+                    <h3>
+
+                        <a href="{% url 'product_detail' item.product.id %}">
+
+                            {{ item.product.name }}
+
+                        </a>
+
+                    </h3>
+
+                    <span>
+                        Rs. {{ item.product.price }}
+                    </span>
+
+                </div>
+
+
+                <!-- QUANTITY -->
+
+                <div class="quantity-box">
+
+                    <a
+                        href="{% url 'decrease_quantity' item.product.id %}"
+                        class="quantity-btn">
+
+                        −
+
+                    </a>
+
+
+                    <span>
+                        {{ item.quantity }}
+                    </span>
+
+
+                    <a
+                        href="{% url 'increase_quantity' item.product.id %}"
+                        class="quantity-btn">
+
+                        +
+
+                    </a>
+
+                </div>
+
+
+                <!-- TOTAL -->
+
+                <div class="cart-item-total">
+
+                    <strong>
+                        Rs. {{ item.item_total }}
+                    </strong>
+
+                    <a
+                        href="{% url 'remove_from_cart' item.product.id %}"
+                        class="remove-btn">
+
+                        Remove
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- ORDER SUMMARY -->
+
+        <aside class="cart-summary">
+
+            <h2>
+                Order Summary
+            </h2>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <strong>
+                    Rs. {{ total }}
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Delivery
+                </span>
+
+                <span>
+                    Calculated at checkout
+                </span>
+
+            </div>
+
+
+            <div class="summary-line"></div>
+
+
+            <div class="summary-total">
+
+                <span>
+                    Total
+                </span>
+
+                <strong>
+                    Rs. {{ total }}
+                </strong>
+
+            </div>
+
+
+            <a
+                href="{% url 'checkout' %}"
+                class="checkout-btn">
+
+                Proceed to Checkout →
+
+            </a>
+
+
+            <a
+                href="{% url 'products' %}"
+                class="continue-btn">
+
+                ← Continue Shopping
+
+            </a>
+
+        </aside>
+
+    </div>
+
+
+    {% else %}
+
+    <!-- EMPTY CART -->
+
+    <div class="empty-cart">
+
+        <div class="empty-cart-icon">
+            🛒
+        </div>
+
+        <h2>
+            Your Cart is Empty
+        </h2>
+
+        <p>
+            Looks like you haven't added anything to your cart yet.
+        </p>
+
+        <a
+            href="{% url 'products' %}"
+            class="hero-btn">
+
+            Start Shopping →
+
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

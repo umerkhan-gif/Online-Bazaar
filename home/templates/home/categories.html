@@ -1,0 +1,70 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Categories - OnlineBazar{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1 class="page-title">Shop by Category</h1>
+
+    <div style="
+        display:grid;
+        grid-template-columns:repeat(4,1fr);
+        gap:25px;
+        padding-bottom:50px;
+    ">
+
+        {% for category in categories %}
+
+            <a href="{% url 'category_products' category.name %}"
+               style="
+                    background:white;
+                    border-radius:12px;
+                    overflow:hidden;
+                    text-align:center;
+                    box-shadow:0 5px 20px rgba(0,0,0,.08);
+                    padding-bottom:20px;
+               ">
+
+                {% if category.image %}
+
+                    <img src="{{ category.image.url }}"
+                         style="
+                            width:100%;
+                            height:200px;
+                            object-fit:cover;
+                         ">
+
+                {% else %}
+
+                    <div style="
+                        height:200px;
+                        background:#eee;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        color:#888;
+                    ">
+                        No Image
+                    </div>
+
+                {% endif %}
+
+                <h2 style="padding-top:18px;">
+                    {{ category.name }}
+                </h2>
+
+            </a>
+
+        {% empty %}
+
+            <p>No categories available.</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

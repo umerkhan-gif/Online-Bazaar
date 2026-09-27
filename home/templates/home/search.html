@@ -1,0 +1,136 @@
+{% extends 'home/base.html' %}
+
+{% block title %}
+Search - OnlineBazar
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+
+    <div class="page-header-content">
+
+        <p>ONLINEBAZAR SEARCH</p>
+
+        <h1>Search Results</h1>
+
+        {% if q %}
+            <span>Results for "{{ q }}"</span>
+        {% else %}
+            <span>Find what you're looking for</span>
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    {% if q %}
+
+    <div class="search-result-heading">
+
+        <h2>
+            Search results for "{{ q }}"
+        </h2>
+
+        <span>
+            {{ products|length }} result{{ products|length|pluralize }}
+        </span>
+
+    </div>
+
+    {% endif %}
+
+
+    <div class="products-grid">
+
+        {% for product in products %}
+
+        <div class="product-card">
+
+            <a href="{% url 'product_detail' product.id %}">
+
+                {% if product.image %}
+
+                <div class="product-image">
+
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}">
+
+                </div>
+
+                {% else %}
+
+                <div class="product-image no-image">
+                    No Image
+                </div>
+
+                {% endif %}
+
+            </a>
+
+
+            <div class="product-info">
+
+                {% if product.category %}
+
+                <p class="category">
+                    {{ product.category.name }}
+                </p>
+
+                {% endif %}
+
+
+                <h3>
+
+                    <a href="{% url 'product_detail' product.id %}">
+
+                        {{ product.name }}
+
+                    </a>
+
+                </h3>
+
+
+                <div class="price">
+                    Rs. {{ product.price }}
+                </div>
+
+
+                <a
+                    href="{% url 'add_to_cart' product.id %}"
+                    class="add-btn">
+
+                    Add to Cart
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        {% empty %}
+
+        <div class="empty-products">
+
+            <h2>
+                No Products Found
+            </h2>
+
+            <p>
+                Try searching with another product name.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

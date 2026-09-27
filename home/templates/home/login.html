@@ -1,0 +1,121 @@
+{% extends 'home/base.html' %}
+
+{% block title %}
+Login - OnlineBazar
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="auth-container">
+
+        <div class="auth-image">
+            <div class="auth-image-content">
+                <p>WELCOME BACK</p>
+
+                <h1>
+                    Shop smarter
+                    <br>
+                    with OnlineBazar.
+                </h1>
+
+                <span>
+                    Login to continue your shopping experience.
+                </span>
+            </div>
+        </div>
+
+
+        <div class="auth-form">
+
+            <div class="auth-heading">
+
+                <p class="section-small">
+                    ONLINEBAZAR
+                </p>
+
+                <h2>
+                    Welcome Back
+                </h2>
+
+                <p>
+                    Login to your account to continue.
+                </p>
+
+            </div>
+
+
+            {% if error %}
+
+            <div class="auth-error">
+                {{ error }}
+            </div>
+
+            {% endif %}
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="auth-field">
+
+                    <label>
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Enter your username"
+                        required>
+
+                </div>
+
+
+                <div class="auth-field">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-btn">
+
+                    Login →
+
+                </button>
+
+            </form>
+
+
+            <div class="auth-bottom">
+
+                <span>
+                    Don't have an account?
+                </span>
+
+                <a href="{% url 'signup' %}">
+                    Create Account
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
