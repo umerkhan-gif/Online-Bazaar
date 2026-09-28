@@ -161,25 +161,23 @@ Backend & Web Development
 
 ### 🏠 Homepage
 
-![Online-Bazaar Homepage](screenshots/home.png)
+![Online-Bazaar Homepage](home.png)
 
 ### 🛍️ Products
 
-![Online-Bazaar Products](screenshots/products.png)
+![Online-Bazaar Products](products.png)
 
 ### 📦 Product Details
 
-![Online-Bazaar Product Details](screenshots/product-detail.png)
+![Online-Bazaar Product Details](product-detail.png)
 
 ### 🛒 Shopping Cart
 
-![Online-Bazaar Shopping Cart](screenshots/cart.png)
+![Online-Bazaar Shopping Cart](cart.png)
 
 ### 📋 My Orders
 
-![Online-Bazaar My Orders](screenshots/orders.png)
-
----
+![Online-Bazaar My Orders](orders.png)
 
 ## 🎯 What I Learned
 
