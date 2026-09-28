@@ -155,5 +155,65 @@ Python & Django Developer
 Backend & Web Development
 
 ---
+---
+
+## 📸 Project Screenshots
+
+### 🏠 Homepage
+
+![Online-Bazaar Homepage](screenshots/home.png)
+
+### 🛍️ Products
+
+![Online-Bazaar Products](screenshots/products.png)
+
+### 📦 Product Details
+
+![Online-Bazaar Product Details](screenshots/product-detail.png)
+
+### 🛒 Shopping Cart
+
+![Online-Bazaar Shopping Cart](screenshots/cart.png)
+
+### 📋 My Orders
+
+![Online-Bazaar My Orders](screenshots/orders.png)
+
+---
+
+## 🎯 What I Learned
+
+Through this project, I practiced:
+
+* Python and Django development
+* Django Models and Forms
+* CRUD operations
+* User authentication
+* Database integration
+* Product and category management
+* Shopping cart functionality
+* Order management
+* HTML, CSS and JavaScript
+* Git and GitHub
+
+---
+
+## 🚀 Future Improvements
+
+* Online payment integration
+* Wishlist system
+* Product reviews and ratings
+* Advanced filtering
+* REST API
+* Live deployment
+
+---
+
+👨‍💻 Developer
+
+Umer Zaib Khan
+
+Python & Django Developer
+Backend & Web Development
 
 ⭐ If you find this project useful, consider giving it a star!
