@@ -209,7 +209,7 @@ Through this project, I practiced:
 
 👨‍💻 Developer
 
-Umer Zaib Khan
+Umar Zaib Khan
 
 Python & Django Developer
 Backend & Web Development
